@@ -1,9 +1,12 @@
 import { getTestFilePath } from '@utils'
 import { describe, expect, it } from 'vitest'
-import solution, { pairIsUnsafe } from './01'
+import solution01 from './01'
+import { pairIsUnsafe } from './countSafeReports'
 
-it('Should count safe reports', () => {
-  expect(solution(getTestFilePath('02'))).toBe(2)
+describe('S01', () => {
+  it('Should count safe reports', () => {
+    expect(solution01(getTestFilePath('02'))).toBe(2)
+  })
 })
 
 describe('pairIsUnsafe', () => {
@@ -17,7 +20,7 @@ describe('pairIsUnsafe', () => {
     ${-2} | ${'DEC'} | ${true}
     ${-2} | ${'INC'} | ${false}
     ${2} | ${'DEC'} | ${false}
-  `('', ({ difference, direction, expected }) => {
+  `('$direction, $difference', ({ difference, direction, expected }) => {
     expect(pairIsUnsafe(direction, difference)).toBe(expected)
   })
 })
