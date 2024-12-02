@@ -1,3 +1,3 @@
-import { hello } from './hello'
+import { day01 } from './days'
 
-console.log(hello())
+console.log(day01('./days/01/data/input.txt'))
