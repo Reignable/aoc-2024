@@ -3,9 +3,11 @@ import Table from 'cli-table3'
 
 const getInputDataFilePath = (dayNumber: string): string => `./days/${dayNumber}/data/input.txt`
 
-const solutions = Object.entries(dayFns).reduce((all, [dayKey, dayFn]) => {
+const solutions = Object.entries(dayFns).reduce((all, [dayKey, solutionFns]) => {
   const dayNumber = dayKey.replace('d', '')
-  return { ...all, [dayNumber]: dayFn(getInputDataFilePath(dayNumber)) }
+  const { s01 } = solutionFns
+
+  return { ...all, [dayNumber]: s01(getInputDataFilePath(dayNumber)) }
 }, {})
 
 const table = new Table({
