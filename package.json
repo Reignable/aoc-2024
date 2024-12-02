@@ -2,9 +2,10 @@
   "name": "aoc-2024",
   "version": "0.0.0",
   "description": "Advent of Code 2024",
-  "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "ts-node src/main.ts",
+    "serve": "nodemon src/main.ts",
+    "test": "vitest"
   },
   "keywords": [
     "aco",
@@ -16,5 +17,12 @@
     "node"
   ],
   "author": "Reignable",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.2",
+    "vitest": "^2.1.6"
+  }
 }
