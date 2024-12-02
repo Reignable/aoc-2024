@@ -5,9 +5,9 @@ const getInputDataFilePath = (dayNumber: string): string => `./days/${dayNumber}
 
 const solutions = Object.entries(dayFns).reduce((all, [dayKey, solutionFns]) => {
   const dayNumber = dayKey.replace('d', '')
-  const { s01 } = solutionFns
+  const inputDataFilePath = getInputDataFilePath(dayNumber)
 
-  return { ...all, [dayNumber]: s01(getInputDataFilePath(dayNumber)) }
+  return { ...all, [dayNumber]: Object.values(solutionFns).map(fn => fn(inputDataFilePath)) }
 }, {})
 
 const table = new Table({
