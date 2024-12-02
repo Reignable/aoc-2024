@@ -1,0 +1,20 @@
+{
+  "name": "aoc-2024",
+  "version": "0.0.0",
+  "description": "Advent of Code 2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "aco",
+    "advent",
+    "code",
+    "2024",
+    "typescript",
+    "ts",
+    "node"
+  ],
+  "author": "Reignable",
+  "license": "ISC"
+}
