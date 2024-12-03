@@ -1,9 +1,7 @@
 import { loadFileToString, sumArray } from '@utils'
+import { performMultiplicationInstruction } from './performMultiplicationInstruction'
 
 const VALID_COMMAND_REGEX = /(don't\(\))|(mul\(\d{1,3},\d{1,3}\))|(do\(\))/g
-
-const instructionToNumberPair = (instruction: string): number[] =>
-  instruction.match(/\d{1,3}/g)?.map(Number) ?? []
 
 const solution = (filePath: string) => {
   const memory = loadFileToString(filePath)
@@ -18,8 +16,7 @@ const solution = (filePath: string) => {
       commandsToPerform = [...commandsToPerform, instruction]
   }
 
-  const numberPairs = commandsToPerform?.map(instructionToNumberPair)
-  const products = numberPairs?.map(([a, b]) => a * b) ?? []
+  const products = commandsToPerform.map(performMultiplicationInstruction)
   return sumArray(products)
 }
 
