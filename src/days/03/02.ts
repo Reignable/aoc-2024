@@ -7,14 +7,12 @@ const solution = (filePath: string) => {
   const memory = loadFileToString(filePath)
   const instructions = memory.match(VALID_COMMAND_REGEX) ?? []
 
-  let commandsToPerform: string[] = []
   let shouldTake = true
-  for (const instruction of instructions) {
-    if (instruction === 'don\'t()') shouldTake = false
-    if (instruction === 'do()') shouldTake = true
-    if (instruction.includes('mul') && shouldTake)
-      commandsToPerform = [...commandsToPerform, instruction]
-  }
+  const commandsToPerform = instructions.reduce<string[]>((acc, instruction) => {
+    if (instruction.includes('mul') && shouldTake) return [...acc, instruction]
+    shouldTake = instruction === 'do()'
+    return acc
+  }, [])
 
   const products = commandsToPerform.map(performMultiplicationInstruction)
   return sumArray(products)
