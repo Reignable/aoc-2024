@@ -11,25 +11,36 @@ export const pairIsUnsafe = (direction: ReportDirection, difference: number) => 
   return false
 }
 
-const getReportSafety = (report: number[]): ReportSafety => {
+export const getReportSafety = (useProblemDampener: boolean) => (report: number[]): ReportSafety => {
   if (report.length < 2) return 'SAFE'
 
   const direction: ReportDirection = report[1] > report[0] ? 'INC' : 'DEC'
 
-  for (let i = 1; i < report.length; i++) {
+  for (let i = 1; i < report.length; ++i) {
     const difference = report[i - 1] - report[i]
+
     if (pairIsUnsafe(direction, difference)) {
-      return 'UNSAFE'
+      if (useProblemDampener) {
+        const newResults = [i, i + 1, i - 1, i - 2]
+          .filter(index => index >= 0 && index < report.length)
+          .map(
+            index => getReportSafety(false)(report.toSpliced(index, 1)),
+          )
+        return newResults.every(result => result === 'UNSAFE') ? 'UNSAFE' : 'SAFE'
+      }
+      else {
+        return 'UNSAFE'
+      }
     }
   }
 
   return 'SAFE'
 }
 
-const countSafeReports = (filePath: string) => {
+const countSafeReports = (filePath: string, { useProblemDampener } = { useProblemDampener: false }) => {
   const rows = loadFileRows(filePath)
   const reports = rows.map(row => row.split(' ').map(Number))
-  const results = reports.map(getReportSafety)
+  const results = reports.map(getReportSafety(useProblemDampener))
   const safeCount = results.reduce((count, result) => count + +(result === 'SAFE'), 0)
   return safeCount
 }
