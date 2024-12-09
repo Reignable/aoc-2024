@@ -1,6 +1,7 @@
 {
   "name": "aoc-2024",
   "version": "0.0.0",
+  "type": "module",
   "description": "Advent of Code 2024",
   "scripts": {
     "start": "npx tsx src/main.ts",
