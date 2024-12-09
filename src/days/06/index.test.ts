@@ -12,7 +12,9 @@ describe('01', () => {
 })
 
 describe('02', () => {
-  it.todo('passes')
+  it('Calculates where to put an obstruction to loop the guard', () => {
+    expect(s02(testFilePath)).toBe(6)
+  })
 })
 
 describe('nextMoveIsOffGrid', () => {
